@@ -1,10 +1,7 @@
 from flask import Flask, flash, render_template, request, redirect, url_for, jsonify
 from datetime import datetime, timedelta
 import psycopg2
-from app import app
 
-
-application = app
 # app = Flask(__name__)
 
 app = Flask(__name__, static_url_path='/static')
