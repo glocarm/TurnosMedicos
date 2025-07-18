@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Iniciar Sesión</title>
+      <link rel="stylesheet" href="static/css/style.css"/>
+  </head>
+  <body class="formlogin" >
+
+
+<style> 
+/* Estilos básicos y de fondo */
+.formlogin {
+  background: linear-gradient(135deg, #4e73df, #1cc88a);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor principal */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Tarjeta de login */
+#login-card {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Centrar logo y texto */
+.text-center {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Logo estilo */
+.logoh {
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  margin-bottom: 10px;
+  margin-left: 60px;
+}
+
+/* Estilo para las etiquetas */
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Inputs de formulario */
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #4e73df;
+  box-shadow: 0 0 8px rgba(78, 115, 223, 0.6);
+  outline: none;
+}
+
+/* Estilo para el botón submit */
+input[type="submit"].btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="submit"].btn-primary {
+  background-color: #4e73df;
+  color: #fff;
+}
+
+input[type="submit"].btn-primary:hover {
+  background-color: #2e59d9;
+}
+
+/* Estilo para la fila del botón */
+.row {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+</style> 
+<div  class="login-container" >
+      <div class="login-card">
+        <div class="text-center">
+          <img
+            class="img-thumbnail logoh"
+            width="200"
+            src="static/img/logo.jpg"
+            alt="Logo"
+          />
+         
+        </div>
+
+        <div class="row" id="login-card">
+          <form method="POST" action="/ingresar">
+            <label>Usuario :</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Ingrese su email"
+              required
+            />
+            <br />
+            <label>Contraseña :</label>
+            <input
+              type="password"
+              name="contrasena"
+              id="contrasena"
+              placeholder="Ingrese su Contraseña"
+              required
+            />
+            <div class="row">
+              <input
+                type="submit"
+                value="Ingresar"
+                class="btn btn-primary"
+
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  
+  </body>
+</html>

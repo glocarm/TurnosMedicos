@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Listado de Turnos</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+      <!-- Enlaza el CSS usando url_for si usas Flask -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilos/style.css') }}" />
+  </head>
+  <body>
+
+   {% include 'header.html'  %}
+    <h1>Sistema de Turnos Médicos</h1>
+    <main>
+      <h3>Listado de Turnos Médicos</h3>
+      <div class="search-container">
+        <form method="GET" action="/filtrarpdf">
+         <input
+            type="search"
+            name="buscar"
+            id="buscar"
+            placeholder="Buscar..."
+            value="{{ search }}"
+          />
+          <div style="text-align:center; padding: 10px;">
+          <button type="submit" id="botactions">Buscar</button></div> 
+        </form>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Médico</th>
+            <th>Horario</th>
+            <th>Fecha</th>
+            <th>Paciente</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for listadoturnos in listadoturnos %}
+          <tr>
+            <td>{{ listadoturnos[0] }}</td>
+            <td>{{ listadoturnos[1] }}-{{ listadoturnos[2] }} {{ listadoturnos[3] }}</td>
+            <td>{{ listadoturnos[4] }}-{{ listadoturnos[5] }} </td>
+             <td>{{ listadoturnos[11] }}</td>
+            <td> {{ listadoturnos[6] }}-{{ listadoturnos[7] }} {{ listadoturnos[8] }} </td>
+           
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Clínica Médica</p>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

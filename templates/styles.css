@@ -1,0 +1,105 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 40px;
+  background-color: #f4f4f4;
+}
+h1 {
+  text-align: center;
+  color: #333;
+}
+form {
+  margin-bottom: 30px;
+  display: flex;
+  border: 2px solid gray;
+  justify-content: center;
+  gap: 10px;
+}
+input[type="text"] {
+  padding: 8px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #218838;
+}
+table {
+  width: 80%;
+  margin: 0 auto 30px auto;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+th,
+td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+th {
+  background-color: #f8f9fa;
+}
+.actions button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.editar {
+  background-color: #007bff;
+  color: white;
+}
+.eliminar {
+  background-color: #dc3545;
+  color: white;
+}
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  border-radius: 8px;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* Responsive */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 90%;
+  }
+  table {
+    width: 95%;
+  }
+}

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Gestión de Médicos</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+     <!-- Enlaza el CSS usando url_for si usas Flask -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos/style.css') }}" />   
+    <script>
+      function showAlert(message) {
+        alert(message);
+      }
+    </script>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <script>
+                    showAlert("{{ message }}");
+                </script>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+   {% include 'header.html'  %}
+    <h1>Sistema de Turnos Médicos</h1>
+    <main>
+      <h3>Gestión de Médicos</h3>
+      <!-- Formulario para agregar -->
+      <div class="container">
+        <form method="POST" action="/agregarmed">
+          <input
+            type="text"
+            name="nombremed"
+            placeholder="Nombre del Médico"
+            required
+          />
+          <input
+            type="text"
+            name="apellidomed"
+            placeholder="Apellido del Médico"
+            required
+          />
+          <select name="especialidadid" id="especialidadid">
+            {% for especialidades in especialidades%}
+            <option value="{{ especialidades[0] }}">
+              {{ especialidades[0] }} - {{ especialidades[1] }}
+            </option>
+            {% endfor %}
+          </select>
+          <input
+            type="text"
+            name="telefonomed"
+            id="telefonomed"
+            placeholder="Teléfono del Médico"
+            required
+          />
+          <input
+            type="text"
+            name="direccionmed"
+            id="direccionmed"
+            placeholder="Dirección del Médico"
+            required
+          />
+          <input
+            type="text"
+            name="cedulamed"
+            id="cedulamed"
+            placeholder="Cédula del Médico"
+            required
+          />
+          </div>
+          <!--type="submit"-->
+          <div style="text-align:center; padding: 10px;"><button  title="Agregar datos de un Médico" id="botactions" >Agregar</button></div>
+        </form>
+      </div>
+      <div class="search-container">
+        <form method="GET" action="/filtrarmedico">
+         <input
+            type="search"
+            name="buscar"
+            id="buscar"
+            placeholder="Buscar..."
+            value="{{ search }}"
+          />
+           <div style="text-align:center; padding: 10px;">
+          <button type="submit" id="botactions">Buscar</button></div>
+        </form>
+      </div>
+      <!-- Tabla de Médicos -->
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre Completo</th>
+            <th>Cédula</th>
+            <th>Especialidad</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for medico in medicos %}
+          <tr>
+            <td>{{ medico[0] }}</td>
+            <td>{{ medico[2] }} {{ medico[1] }}</td>
+            <td>{{ medico[5] }}</td>
+            <td>{{ medico[6] }} - {{ medico[7] }}</td>
+            <td>{{ medico[3] }}</td>
+            <td>{{ medico[4] }}</td>
+            <td class="actions">
+              <button id="botactions" class="editarmed"  title="Editar datos del Médico" data-id="{{medico[0]}}">Editar</button>
+             <!-- <form
+                method="POST"
+                action="/eliminarmed/{{medico[0]}}"
+                style="display: inline"
+              > -->
+                <button
+                  title="Eliminar datos del Médico"
+                  type="submit"
+                  id="botactions"
+                  class="eliminarmed"
+                  onclick="return confirm('¿Seguro que desea eliminar?')"
+                >
+                  <a
+                  title="Eliminar Médico"
+                  href="/eliminarmed/{{medico[0]}}"
+                  >Eliminar</a
+                >
+                </button>
+             
+              <button type="submit" id="botactions">
+              <a  title="Agregar Horario a Médico" href="/agregarHorariomed/{{medico[0]}}">Cargar Horario</a></button>
+            </td> 
+            </form>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <!--Modal para editar -->
+      <div id="editModal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="closeModal">&times;</span>
+          <h2>Editar datos del Médico</h2>
+          <form id="editFormed" method="POST" action="">
+            <input type="hidden" name="id" id="id" />
+            <label for="nombremed">Nombre del Médico:</label>
+            <input type="text" name="nombremed" id="nombremed" required />
+            <label for="apellidomed">Apellido del Médico:</label>
+            <input type="text" name="apellidomed" id="apellidomed" required />
+            <br /><br />
+            <button type="submit">Guardar cambios</button>
+          </form>
+        </div>
+      </div>
+
+      <script>
+        // Obtener elementos
+        const modal = document.getElementById("editModal");
+        const closeBtn = document.getElementById("closeModal");
+        const editButtons = document.querySelectorAll(".editarmed");
+        const form = document.getElementById("editFormed");
+
+        // Cuando clickean en editar
+        editButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const id = btn.getAttribute("data-id");
+            fetch(`/editarmed/${id}`)
+              .then((response) => response.json())
+              .then((data) => {
+                document.getElementById("id").value = data[0];
+                document.getElementById("nombremed").value = data[1];
+                document.getElementById("apellidomed").value = data[2];
+                form.action = `/actualizarmed/${data[0]}`;
+                modal.style.display = "block";
+              });
+          });
+        });
+
+        // Cuando clickea en cerrar
+        closeBtn.onclick = function () {
+          modal.style.display = "none";
+        };
+
+        // Cuando clickea fuera del modal
+        window.onclick = function (event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        };
+      </script>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Clínica Médica</p>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
