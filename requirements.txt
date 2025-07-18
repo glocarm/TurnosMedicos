@@ -1,0 +1,5 @@
+python                 3.12.4
+Flask                  3.0.2
+psycopg2-binary        2.9.10
+flash                  1.0.3
+PyMuPDF                1.24.14
