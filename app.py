@@ -13,7 +13,8 @@ def get_db_connection():
 #54.191.253.12
 #44.226.122.3
         database="Turnos",
-        user="postgres",       
+        user="postgres",
+        port="5432"   ,   
         password="1234"  
     )
     return conn
