@@ -2,9 +2,7 @@ from flask import Flask, flash, render_template, request, redirect, url_for, jso
 from datetime import datetime, timedelta
 import psycopg2
 
-app = Flask(__name__)
-
-app = Flask(static_url_path='/static')
+app = Flask(__name__ , static_url_path='/static')
 
 app.secret_key = '1234'
 
