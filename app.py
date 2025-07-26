@@ -9,13 +9,11 @@ app.secret_key = '1234'
 # Configuración de conexión a PostgreSQL
 def get_db_connection():
     conn = psycopg2.connect(
-        host="52.41.36.82",       
-#54.191.253.12
-#44.226.122.3
-        database="Turnos",
-        user="postgres",
-        port="5432"   ,   
-        password="1234"  
+        host="dpg-d1soovje5dus73efun50-a",  
+        database= "turnos_1laq", # "Turnos",
+        user="turnos_1laq_user", #"postgres",
+        port="5432" ,   
+        password= "GEn2o1pj6Za7APFcBpwiMij397M0ltqg",   #"1234"
     )
     return conn
 
